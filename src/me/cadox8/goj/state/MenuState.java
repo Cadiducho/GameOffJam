@@ -21,7 +21,7 @@ public class MenuState extends State {
         uiManager = new UIManager(gameAPI);
         gameAPI.getMouseManager().setUIManager(uiManager);
 
-        uiManager.addObject(new UIImage(5, 5, 214, 182, Assets.house));
+        uiManager.addObject(new UIImage(5, 5, 128, 128, Assets.house));
         uiManager.addObject(new UIImageAnim(250, 5, 32, 64, new Animation(100, Assets.door)));
 
         uiManager.addObject(new UIImageButton(150, 650, 200, 100, null, () -> {

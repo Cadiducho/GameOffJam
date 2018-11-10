@@ -1,33 +1,25 @@
 package me.cadox8.goj.buildings.house;
 
+import lombok.Getter;
 import me.cadox8.goj.buildings.Building;
-import me.cadox8.goj.buildings.butils.AbandonedState;
+import me.cadox8.goj.gfx.textures.Assets;
 
-public abstract class HouseBuilding extends Building {
+public class HouseBuilding extends Building {
 
-    protected int maxPopulation;
-    protected int population;
+    @Getter private int maxPopulation;
 
     public HouseBuilding(int level) {
-        super(BuildingType.HOUSE, level, null);
+        super(BuildingType.HOUSE, level, BuildingState.EMPTY);
 
         setMaxPopulation();
-        population = 0;
+
+        // Icons
+        addIcon(BuildingState.GOOD, Assets.house);
     }
 
-    public boolean removePopulation() {
-        if (population-- < 0) return false;
-        population--;
-        happiness--;
-        if (population == 0) setBuildingState(new AbandonedState());
-        return true;
-    }
+    @Override
+    public void work() {
 
-    public boolean addPopulation() {
-        if (population++ > maxPopulation) return false;
-        happiness++;
-        population++;
-        return true;
     }
 
     private void setMaxPopulation() {

@@ -2,20 +2,19 @@ package me.cadox8.goj.events.building;
 
 import lombok.Getter;
 import me.cadox8.goj.buildings.Building;
-import me.cadox8.goj.buildings.butils.BState;
 
 public class BuildingStateChangeEvent extends BuildingEvent {
 
-    @Getter private BState oldState;
-    @Getter private BState newState;
+    @Getter private Building.BuildingState oldState;
+    @Getter private Building.BuildingState newState;
 
-    public BuildingStateChangeEvent(Building building, BState oldState, BState newState) {
+    public BuildingStateChangeEvent(Building building, Building.BuildingState oldState, Building.BuildingState newState) {
         super(building);
 
         this.oldState = oldState;
         this.newState = newState;
 
-        if (oldState.getBuildingState() == BState.State.BURNED && newState.getBuildingState() == BState.State.ONFIRE) setCancelled(true);
+        if (oldState == Building.BuildingState.BURNED && newState == Building.BuildingState.ONFIRE) setCancelled(true);
 
         onEvent();
     }
