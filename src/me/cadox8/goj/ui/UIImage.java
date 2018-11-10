@@ -2,6 +2,7 @@ package me.cadox8.goj.ui;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 public class UIImage extends UIObject {
 
@@ -9,6 +10,9 @@ public class UIImage extends UIObject {
 
     private UIText noImage;
 
+    public UIImage(float x, float y, int width, int height, BufferedImage image) {
+        this(x, y, width, height, Arrays.asList(image).toArray(new BufferedImage[1]));
+    }
     public UIImage(float x, float y, int width, int height, BufferedImage[] images) {
         super(x, y, width, height);
         this.images = images;

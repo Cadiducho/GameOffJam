@@ -9,6 +9,9 @@ public class UIImageAnim extends UIObject {
     private Animation anim;
     private ClickListener clicker;
 
+    public UIImageAnim(float x, float y, int width, int height, Animation anim) {
+        this(x, y, width, height, anim, () -> {});
+    }
     public UIImageAnim(float x, float y, int width, int height, Animation anim, ClickListener clicker) {
         super(x, y, width, height);
         this.anim = anim;

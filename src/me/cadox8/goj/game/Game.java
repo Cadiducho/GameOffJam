@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.goj.api.GameAPI;
 import me.cadox8.goj.display.Display;
+import me.cadox8.goj.gfx.textures.Assets;
 import me.cadox8.goj.input.KeyManager;
 import me.cadox8.goj.input.MouseManager;
 import me.cadox8.goj.state.MenuState;
@@ -54,6 +55,8 @@ public class Game implements Runnable {
         display.getCanvas().addMouseWheelListener(mouseManager);
 
         gameAPI = new GameAPI(this);
+
+        Assets.init();
 
         menuState = new MenuState(gameAPI);
 
