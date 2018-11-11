@@ -1,7 +1,9 @@
 package me.cadox8.goj.city;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.goj.buildings.Building;
+import me.cadox8.goj.buildings.factory.FactoryBuilding;
 import me.cadox8.goj.buildings.house.HouseBuilding;
 import me.cadox8.goj.buildings.services.Service;
 import me.cadox8.goj.entities.Entity;
@@ -14,6 +16,8 @@ public class City {
 
     @Getter private String cityName;
 
+    @Getter @Setter private CityData cityData;
+
     @Getter private double money;
 
     @Getter private ArrayList<Building> buildings;
@@ -25,6 +29,17 @@ public class City {
         this.money = 2500;
         this.buildings = new ArrayList<>();
         this.population = new ArrayList<>();
+
+        setCityData(new CityData());
+    }
+
+
+    public boolean buildFactory(int level) {
+        double cost = getBuildCost(level, Building.BuildingType.FACTORY);
+
+        if (money - cost < 0) return false;
+        buildings.add(new FactoryBuilding(level));
+        return true;
     }
 
     public boolean buildHouse(int level) {
@@ -34,6 +49,7 @@ public class City {
         buildings.add(new HouseBuilding(level));
         return true;
     }
+
 
     public boolean removePopulation(HouseBuilding houseBuilding) {
         return removePopulation(houseBuilding, 1);
