@@ -3,6 +3,7 @@ package me.cadox8.goj.game;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.goj.api.GameAPI;
+import me.cadox8.goj.city.City;
 import me.cadox8.goj.display.Display;
 import me.cadox8.goj.gfx.textures.Assets;
 import me.cadox8.goj.input.KeyManager;
@@ -15,12 +16,16 @@ import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
 
+    // Internal
     private final String title;
     @Getter private final int width, height;
-
+    @Getter private final KeyManager keyManager;
+    @Getter private final MouseManager mouseManager;
     @Getter private static GameAPI gameAPI;
-
     @Getter private Display display;
+
+    @Getter private State menuState;
+    //
 
     // Utils
     @Getter @Setter private boolean running = false;
@@ -30,11 +35,9 @@ public class Game implements Runnable {
     private Graphics g;
     //
 
-    @Getter private State menuState;
-
-    // Input
-    @Getter private final KeyManager keyManager;
-    @Getter private final MouseManager mouseManager;
+    // Game
+    @Getter @Setter private City city;
+    //
 
     public Game(String name, int width, int height) {
         this.title = name;

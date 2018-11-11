@@ -3,9 +3,12 @@ package me.cadox8.goj.city;
 import lombok.Getter;
 import me.cadox8.goj.buildings.Building;
 import me.cadox8.goj.buildings.house.HouseBuilding;
+import me.cadox8.goj.buildings.services.Service;
 import me.cadox8.goj.entities.Entity;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class City {
 
@@ -62,6 +65,12 @@ public class City {
         return true;
     }
 
+    public void addMoney(double amount) {
+        money += amount;
+    }
+    public void removeMoney(double amount) {
+        money -= amount;
+    }
 
     public double getBuildCost(int level, Building.BuildingType buildingType) {
         switch (buildingType) {
@@ -75,5 +84,15 @@ public class City {
             default:
                 return 0;
         }
+    }
+
+    public List<Building> getBuildingByType(Building.BuildingType type) {
+        return buildings.stream().filter(b -> b.getBuildingType() == type).collect(Collectors.toList());
+    }
+
+    public List<Service> getServicesByType(Service.ServiceType type) {
+        List<Service> ser = new ArrayList<>();
+        getBuildingByType(Building.BuildingType.SERVICES).stream().filter(s -> ((Service)s).getServiceType() == type).collect(Collectors.toList()).forEach(s -> ser.add((Service)s));
+        return ser;
     }
 }

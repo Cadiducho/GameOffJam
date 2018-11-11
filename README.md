@@ -19,8 +19,8 @@ Also, I use this tools to help me develop the game:
 ## ToDo
 [x] Game Structure<br>
 [ ] Assets<br>
-[ ] Game Mechanics<br>
+[x] Game Mechanics<br>
 [ ] Game Design<br>
 [ ] Add Services (Police, Water, etc)<br>
-[ ] Happiness affecting to the game<br>
+[x] Happiness affecting to the game<br>
 [ ] A lot of more ideas I don't have right now

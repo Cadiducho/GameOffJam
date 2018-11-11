@@ -2,14 +2,18 @@ package me.cadox8.goj.buildings;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.cadox8.goj.api.GameAPI;
 import me.cadox8.goj.entities.Entity;
 import me.cadox8.goj.events.building.BuildingStateChangeEvent;
+import me.cadox8.goj.game.Game;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Building {
+
+    protected static final GameAPI gameAPI = Game.getGameAPI();
 
     @Getter @Setter protected BuildingType buildingType;
     @Getter @Setter protected int level;
