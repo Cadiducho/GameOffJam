@@ -7,14 +7,16 @@ import me.cadox8.goj.buildings.factory.FactoryBuilding;
 import me.cadox8.goj.buildings.house.HouseBuilding;
 import me.cadox8.goj.buildings.services.Service;
 import me.cadox8.goj.entities.Entity;
+import me.cadox8.goj.entities.People;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class City {
 
-    @Getter private String cityName;
+    @Getter private final String cityName;
 
     @Getter @Setter private CityData cityData;
 
@@ -26,11 +28,12 @@ public class City {
 
     public City(String cityName) {
         this.cityName = cityName;
+
         this.money = 2500;
         this.buildings = new ArrayList<>();
         this.population = new ArrayList<>();
 
-        setCityData(new CityData());
+        setCityData(new CityData(0));
     }
 
 
@@ -65,19 +68,24 @@ public class City {
         return true;
     }
 
+    public boolean addPopulation() {
+        return population.add(new People());
+    }
+
     public boolean addPopulation(HouseBuilding houseBuilding) {
         return addPopulation(houseBuilding, 1);
     }
     public boolean addPopulation(HouseBuilding houseBuilding, int amount) {
         if (houseBuilding.getPeopleInBuilding() + amount > houseBuilding.getMaxPopulation()) return false;
 
-        for (int x = 0; x < amount; x++) {
-            Entity en = population.stream().filter(p -> p.getHouse() == null).findFirst().get();
-            if (en == null) return false;
-            en.setHouse(houseBuilding);
-            houseBuilding.getPeopleInside().add(en);
-            houseBuilding.setHappiness(houseBuilding.getHappiness() + 1);
-        }
+        try {
+            for (int x = 0; x < amount; x++) {
+                People en = (People) population.stream().filter(p -> ((People)p).getHouse() == null).findFirst().get();
+                en.setHouse(houseBuilding);
+                houseBuilding.getPeopleInside().add(en);
+                houseBuilding.setHappiness(houseBuilding.getHappiness() + 1);
+            }
+        } catch (NoSuchElementException e) { return false; }
         return true;
     }
 

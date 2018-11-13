@@ -10,11 +10,16 @@ public class Assets {
     public static final int WIDTH = 32, HEIGHT = 32;
     private static Sprites sprites;
 
+    public static BufferedImage newGame, loadGame;
+
     public static BufferedImage house;
 
     public static BufferedImage[] door;
 
     public static void init() {
+        sprites = new Sprites(Utils.loadImage("/utils/menu.png"));
+        newGame = getImage(0, 0, 270, 73);
+
         sprites = new Sprites(Utils.loadImage("/textures/house.png"));
 
         house = getImage(0, 0, 214, 182);

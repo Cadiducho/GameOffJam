@@ -2,7 +2,7 @@ package me.cadox8.goj.state;
 
 import me.cadox8.goj.Launcher;
 import me.cadox8.goj.api.GameAPI;
-import me.cadox8.goj.city.City;
+import me.cadox8.goj.files.FileManager;
 import me.cadox8.goj.gfx.Animation;
 import me.cadox8.goj.gfx.textures.Assets;
 import me.cadox8.goj.ui.UIImage;
@@ -26,12 +26,13 @@ public class MenuState extends State {
         uiManager.addObject(new UIImageAnim(250, 5, 32, 64, new Animation(100, Assets.door)));
 
         // ToDo: Start Button
-        uiManager.addObject(new UIImageButton(150, 650, 200, 100, null, () -> {
+        uiManager.addObject(new UIImageButton(150, 650, 200, 100, Assets.newGame, () -> {
             gameAPI.getMouseManager().setUIManager(null);
-            gameAPI.setCity(new City("")); // ToDo: Load or create City
+            System.out.println("Game daved");
+            FileManager.save(gameAPI.getCity());
         }));
 
-        uiManager.addObject(new UIImageButton(900, 650, 200, 100, null, () -> System.exit(0)));
+        uiManager.addObject(new UIImageButton(900, 650, 200, 100, Assets.newGame, () -> System.exit(0)));
     }
 
 

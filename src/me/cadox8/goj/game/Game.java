@@ -3,8 +3,11 @@ package me.cadox8.goj.game;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.goj.api.GameAPI;
+import me.cadox8.goj.buildings.Building;
+import me.cadox8.goj.buildings.house.HouseBuilding;
 import me.cadox8.goj.city.City;
 import me.cadox8.goj.display.Display;
+import me.cadox8.goj.entities.People;
 import me.cadox8.goj.gfx.textures.Assets;
 import me.cadox8.goj.input.KeyManager;
 import me.cadox8.goj.input.MouseManager;
@@ -64,6 +67,14 @@ public class Game implements Runnable {
         menuState = new MenuState(gameAPI);
 
         State.setState(menuState);
+
+        city = new City("Test");
+        city.buildHouse(1);
+        city.getBuildings().get(0).setBuildingState(Building.BuildingState.GOOD);
+        city.addPopulation();
+        ((People)city.getPopulation().get(0)).asingHouse((HouseBuilding) city.getBuildings().get(0));
+
+        gameAPI.setCity(city);
     }
 
 
